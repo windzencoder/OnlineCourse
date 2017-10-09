@@ -6,6 +6,7 @@
 	<artifactId>ocProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<!-- 子项目 -->
 	<modules>
 		<module>ocCommon</module>
 		<module>ocPortal</module>
