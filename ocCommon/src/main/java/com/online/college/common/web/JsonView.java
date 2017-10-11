@@ -17,6 +17,11 @@ public class JsonView {
 		JsonView tmp = new JsonView(0, "success",data);
 		return JSONObject.fromObject(tmp).toString();
 	}
+	//	这里新添加了一个方法
+	public static String render(Integer errcode){
+		JsonView tmp = new JsonView(errcode, "");
+		return JSONObject.fromObject(tmp).toString();
+	}
 	
 	public static String render(Integer errcode, String message){
 		JsonView tmp = new JsonView(errcode, message);
