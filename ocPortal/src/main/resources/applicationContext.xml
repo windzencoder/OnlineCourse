@@ -29,7 +29,6 @@
 	 
 
 	<!-- 加载jdbc 和 app配置文件 -->
-	<!--  
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		lazy-init="true">
@@ -57,9 +56,12 @@
 		<property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}" />
 	</bean>
 
+	<!-- sqlSession -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<property name="dataSource" ref="dataSource" />
+		<!-- mapper文件的位置 -->
 		<property name="mapperLocations" value="classpath*:com/**/dao/*Mapper.xml" />
 	</bean>
 
@@ -71,13 +73,15 @@
 		<property name="basePackage" value="com.**.dao" />
 	</bean>
 
+	<!-- mapper文件对应一个namespace， namespace一般定义为一个接口  -->
+	<!-- 这里的含义是找com.**.dao下所有的接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.**.dao" />
 	</bean>
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
--->
+
 </beans>
 
 
