@@ -16,7 +16,8 @@
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 
-	<!-- jsessionid filter -->
+	<!-- jsessionid filter  -->
+	<!-- java web请求的时候可能会把sessionid带在get post 请求的后面 ，把sessionid过滤掉 -->
 	<filter>
 		<filter-name>jsessionidFilter</filter-name>
 		<filter-class>com.online.college.common.web.DisableUrlSessionFilter</filter-class>
@@ -44,6 +45,7 @@
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 
+	<!-- DispatcherServlet -->
 	<servlet>
 		<servlet-name>app-servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -54,15 +56,18 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- 所有以.html结尾的请求都会经过DispatcherServlet -->
 	<servlet-mapping>
 		<servlet-name>app-servlet</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
+	<!-- spring对bean的容器进行管理的Listener -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- Session超时时间120分钟 -->
 	<session-config>
 		<session-timeout>120</session-timeout>
 	</session-config>
