@@ -37,7 +37,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:/jdbc.properties</value>
-				<value>classpath:/application.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -69,7 +68,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-
+	<!-- 这里是接口与mybatis映射文件 映射的 找到classpath*:com/**/dao/*Mapper.xml 文件做一个映射 -->
 	<!-- mapper文件对应一个namespace， namespace一般定义为一个接口 -->
 	<!-- 这里的含义是找com.**.dao下所有的接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

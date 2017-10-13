@@ -241,6 +241,7 @@
 		WHERE del = 0 
 	</select>
 	
+	<!-- param2表示第二个参数的值 -->
 	<select id="queryPage" resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />

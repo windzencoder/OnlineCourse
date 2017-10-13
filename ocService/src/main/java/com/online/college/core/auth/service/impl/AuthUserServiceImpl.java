@@ -49,7 +49,9 @@ public class AuthUserServiceImpl implements IAuthUserService{
 	}
 
 	public TailPage<AuthUser> queryPage(AuthUser queryEntity ,TailPage<AuthUser> page){
+		//获取总记录数
 		Integer itemsTotalCount = entityDao.getTotalItemsCount(queryEntity);
+		//获取分页数据
 		List<AuthUser> items = entityDao.queryPage(queryEntity,page);
 		page.setItemsTotalCount(itemsTotalCount);
 		page.setItems(items);
