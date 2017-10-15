@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +34,7 @@ public class PortalClassifyController {
 	 */
 	@RequestMapping("/getClassifyJson")
 	@ResponseBody
-	public String getClassifyJson(){
+	public String getClassifyJson(HttpServletRequest request){
 		try {
 			
 			Map<String, ClassifyDto> map = classifyBusiness.getAllClassify();
@@ -41,8 +43,12 @@ public class PortalClassifyController {
 			for (String key : map.keySet()) {
 				list.add(map.get(key));
 			}
+			String result = JsonView.render(list);
+			//跨域访问，客户端js是jsonp，数据返回的方式
+			return request.getParameter("callback") + "(" + result + ")";
 			
-			return JsonView.render(list);
+			//不是跨域，正常ajax请求
+			//return result;
 		} catch (Exception e) {
 			//出错
 			return JsonView.render(1700);//代表什么错误
