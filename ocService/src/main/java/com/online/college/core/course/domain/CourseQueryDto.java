@@ -43,6 +43,7 @@ public class CourseQueryDto extends Course{
 	 */
 	public void descSortField(String sortField) {
 		if(StringUtils.isNotEmpty(sortField)){
+			//例如studyCount转为study_count
 			this.sortField = BeanUtil.fieldToColumn(sortField);
 			this.sortDirection = " DESC ";
 		}
