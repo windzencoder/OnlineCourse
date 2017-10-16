@@ -19,32 +19,40 @@
 	<!-- header -->
 	<#include "./common/header.html">
 
+	<!-- 轮播 -->
 	<div class="f-main">
 		<div class="clearfix">
 			<div class=main-category>
+				<!-- 轮播区 --start -->
 				<div class="main-bg">
-					<div class="main-bg-item "
-						style="background-image: url('${s.base}/res/i/c1.jpg');">
-						<div class="main-title-1"></div>
-					</div>
-
-					<div class="main-bg-item "
-						style="background-image: url('${s.base}/res/i/c2.jpg');">
-						<div class="main-title-2"></div>
-					</div>
-
-					<div class="main-bg-item "
-						style="background-image: url('${s.base}/res/i/c3.jpg');">
-						<div class="main-title-3"></div>
-					</div>
+					<#if carouselList?? &&  carouselList?size gt 0>
+					<#list carouselList as item>
+						<!-- item.url!'' 表示如果item.url不存在及为空 -->
+						<a href="${s.base}${item.url!''}">
+							<div class="main-bg-item"  style='background-image: url("${item.picture!}"); '></div>
+						</a>
+					</#list>
+					</#if>
+					
 				</div>
 
 				<div class="f-nav-box">
 					<div class="bg-nav">
-						<a class="cur"></a> <a></a> <a></a>
+					<#if carouselList?? &&  carouselList?size gt 0>
+					<#list carouselList as item>
+						<#if item_index == 0>
+							<a class="cur"></a> 
+							<#else>
+							<a></a> 
+						</#if>
+					</#list>
+					</#if>
 					</div>
 				</div>
+				
+				<!-- 轮播区 --end -->
 
+				<!-- 分类区 --end -->
 				<div class="main-category-menu">
 					<div class="category" c-id="a">
 						<a><div class="group">数据开发</div></a>
@@ -72,8 +80,7 @@
 				</div>
 
 
-				<div class="main-category-submenu-content" id="a">AAAAAAAAAA
-				</div>
+				<div class="main-category-submenu-content" id="a">AAAAAAAAAA</div>
 
 				<div class="main-category-submenu-content" id="b">
 					BBBBBBBBBBBB</div>
@@ -86,8 +93,7 @@
 
 				<div class="main-category-submenu-content" id="e">EEEEEEEEE</div>
 
-				<div class="main-category-submenu-content" id="f">FFFFFFFFFF
-				</div>
+				<div class="main-category-submenu-content" id="f">FFFFFFFFFF</div>
 
 			</div>
 		</div>
@@ -422,7 +428,15 @@
 </body>
 
 <script>
+	/* 轮播js */
 	$(function(){
+		/* 动态获取轮播图的数量 */
+		<#if carouselList?? &&  carouselList?size gt 0>
+			var size = Number('carouselList?size');
+			<#else>
+			var size = 3;
+		</#if>
+		
 		var index = 0;
 		var timer = 4000;
 		$('.bg-nav a').click(function(){
@@ -441,9 +455,10 @@
 			$('.index-roll-item').removeClass('cur');
 			$($('.index-roll-item')[i]).addClass('cur');
 		}
+		/* 4s执行一次 */
 		setInterval(function(){
 			index += 1;
-			index = index%3;
+			index = index%size;
 			rollBg(index);
 		}, timer);
 		

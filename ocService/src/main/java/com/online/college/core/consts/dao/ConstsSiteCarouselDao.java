@@ -4,7 +4,11 @@ import java.util.List;
 import com.online.college.common.page.TailPage;
 import com.online.college.core.consts.domain.ConstsSiteCarousel;
 
-
+/**
+ * 轮播数据访问接口
+ * @author Miller
+ *
+ */
 public interface ConstsSiteCarouselDao {
 
 	/**

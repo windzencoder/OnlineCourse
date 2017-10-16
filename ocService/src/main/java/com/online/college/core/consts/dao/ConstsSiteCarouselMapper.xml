@@ -23,6 +23,7 @@
 		update_time, update_user, del, id 
 	</sql>
 
+	<!-- 获取轮播  -->
 	<select id="queryCarousels" parameterType="java.lang.Integer" resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />

@@ -11,6 +11,11 @@ import com.online.college.core.consts.domain.ConstsSiteCarousel;
 import com.online.college.core.consts.service.IConstsSiteCarouselService;
 import com.online.college.core.consts.dao.ConstsSiteCarouselDao;
 
+/**
+ * 轮播服务实现类
+ * @author Miller
+ *
+ */
 
 @Service
 public class ConstsSiteCarouselServiceImpl implements IConstsSiteCarouselService{
