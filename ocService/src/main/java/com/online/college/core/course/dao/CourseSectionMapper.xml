@@ -25,6 +25,7 @@
 		create_time, create_user, update_time, update_user, del, id 
 	</sql>
 
+	<!-- 按课程id查询所有的课程章节 -->
 	<select id="queryAll" parameterType="com.online.college.core.course.domain.CourseSection" resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />
