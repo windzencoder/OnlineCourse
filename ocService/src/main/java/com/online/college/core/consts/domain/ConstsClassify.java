@@ -1,7 +1,11 @@
 package com.online.college.core.consts.domain;
 
 import com.online.college.common.orm.BaseEntity;
-
+/**
+ * 课程分类
+ * @author Miller
+ *
+ */
 public class ConstsClassify extends BaseEntity{
 	
 	private static final long serialVersionUID = -7695989855010913861L;

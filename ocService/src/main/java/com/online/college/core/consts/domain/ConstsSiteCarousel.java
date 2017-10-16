@@ -2,7 +2,11 @@ package com.online.college.core.consts.domain;
 
 import com.online.college.common.orm.BaseEntity;
 
-
+/**
+ * 轮播模型类
+ * @author Miller
+ *
+ */
 public class ConstsSiteCarousel extends BaseEntity{
 
 	private static final long serialVersionUID = -68528406716367757L;
