@@ -43,6 +43,27 @@ $(function() {
 		}
 	});
 	
+	
+	//加载课程
+	//ajax请求 rest接口 获取实战课程 免费好课
+	var courseUrl = "http://localhost:8080/ocRest/course/getCourses.html?callback=?";
+	$.jsonp({
+		"url":courseUrl,
+		"success":function(data){
+			//alert(JSON.stringify(data));
+			/*实战课程 免费好课*/
+			
+			var coursesHTML = template("courses", data);
+			$('#coursesDIV').html(coursesHTML);
+		},
+		"error":function(d, msg){
+			alert(msg);
+		}
+	});
+	
+
+	
+	
 
 	
 });

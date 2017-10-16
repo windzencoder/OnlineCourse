@@ -1,26 +1,29 @@
 package com.online.college.rest.test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.online.college.common.util.JsonUtil;
 import com.online.college.common.web.SpringBeanFactory;
+import com.online.college.core.course.domain.Course;
 import com.online.college.rest.business.IClassifyBusiness;
+import com.online.college.rest.business.ICourseBusiness;
 import com.online.college.rest.dto.ClassifyDto;
 
 import junit.framework.TestCase;
 
 /**
- * 课程分类测试用例
+ * 免费课程&实战课程测试用例
  * @author Miller
  *
  */
-public class ClassifyBusinessTest extends TestCase {
+public class CourseBusinessTest extends TestCase {
 
-	public void testGetClassify() {
+	public void testGetCourses() {
 		
-		IClassifyBusiness bis = (IClassifyBusiness)SpringBeanFactory.getBean("classfiyBusinessImpl");
-		Map<String, ClassifyDto> map = bis.getAllClassify();
+		ICourseBusiness bis = (ICourseBusiness)SpringBeanFactory.getBean("courseBusinessImpl");
+		Map<String, List<Course>> map = bis.getCourses();
 		
 		System.out.println("=======");
 		try {
