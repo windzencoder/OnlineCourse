@@ -38,7 +38,7 @@
 		update_user, del, id 
 	</sql>
 
-	<!-- 课程查询 -->
+	<!-- 根据条件获取所有 -->
 	<select id="queryList"  parameterType="com.online.college.core.course.domain.CourseQueryDto"  resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />

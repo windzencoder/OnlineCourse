@@ -62,7 +62,7 @@
 					<div>
 					<#list page.items as item>
 					<#assign n = item_index + 1 />
-					<a href="">
+					<a href="${s.base}/course/learn/${item.id}.html" target="_black">
 						<div class="course-card-container"  <#if n %5 == 0>style="margin-right: 0px;" </#if> >
 							<#if n %5 == 0>
 							<div class="course-card-top green-bg">
@@ -112,16 +112,8 @@
 		<#include "./common/footer.html">
 		
 		<script type="text/javascript">
-		
-			/* 
-			1.点方向的全部 http://localhost:8080/ocPortal/course/list.html?pageNum=1
-			2.点方向的某一项 分类为全部 http://localhost:8080/ocPortal/course/list.html?pageNum=1&c=fe
-			3.点方向的某一项 分类为某一项 http://localhost:8080/ocPortal/course/list.html?pageNum=1&c=jquery 
-			*/
-			
-		
-			var _code = '${curCode}';//方向
-			var _subCode = '${curSubCode}';//分类
+			var _code = '${curCode}';
+			var _subCode = '${curSubCode}';
 			var _sort = '${sort!}';
 			
 			function _queryPage(pageNum,code,sort){
@@ -136,7 +128,7 @@
 				if(code == '-2'){//点击分类的全部
 					code = _code;
 				}
-				if(code != '-1' && code != ''){//code不为分类的全部，为分类的某一个具体的项
+				if(code != '-1' && code != ''){
 					params += '&c='+code;
 				}
 				
