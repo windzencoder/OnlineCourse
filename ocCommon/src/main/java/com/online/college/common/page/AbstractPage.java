@@ -150,6 +150,7 @@ public abstract class AbstractPage<E> implements Page<E> {
 	 */
 	public void descSortField(String sortField) {
 		if (StringUtils.isNotEmpty(sortField)) {
+			//域转列
 			this.sortField = BeanUtil.fieldToColumn(sortField);
 			this.sortDirection = " DESC ";
 		}

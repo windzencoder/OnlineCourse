@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.online.college.common.page.TailPage;
+import com.online.college.core.consts.CourseEnum;
 import com.online.college.core.consts.domain.ConstsClassify;
 import com.online.college.core.consts.service.IConstsClassifyService;
 import com.online.college.core.course.domain.Course;
+import com.online.college.core.course.service.ICourseService;
 import com.online.college.portal.business.IPortalBusiness;
 import com.online.college.portal.vo.ConstsClassifyVO;
 
@@ -30,6 +32,9 @@ public class CourseListController {
 	
 	@Autowired
 	private IPortalBusiness portalBusiness;
+	
+	@Autowired
+	private ICourseService courseService;
 	
 	/**
 	 * 课程分类页
@@ -73,6 +78,32 @@ public class CourseListController {
 		}
 		mv.addObject("curCode", curCode);
 		mv.addObject("curSubCode", curSubCode);
+		
+		
+		//分页排序数据
+		//分页的分类参数
+		Course queryEntity = new Course();
+		if (!"-1".equals(curCode)) {
+			queryEntity.setClassify(curCode);
+		}
+		if (!"-2".equals(curSubCode)) {
+			queryEntity.setSubClassify(curSubCode);
+		}
+		//排序参数 排序的参数是在page中设置的
+		if ("pop".equals(sort)) {//最热
+			page.descSortField("studyCount");//按照sortField降序
+		}else{//最新
+			sort = "last";
+			page.descSortField("id");
+		}
+		mv.addObject("sort", sort);
+		
+		//分页参数
+		queryEntity.setOnsale(CourseEnum.ONSALE.value());
+		//page.setPageSize(2);//设置每页多少个
+		
+		page = this.courseService.queryPage(queryEntity, page);
+		mv.addObject("page", page);
 		
 		return mv;
 		

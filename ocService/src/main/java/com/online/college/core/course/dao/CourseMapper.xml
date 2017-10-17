@@ -74,6 +74,7 @@
 		</if>
 	</select>
 	
+	<!-- 获取总数量 -->
 	<select id="getTotalItemsCount" parameterType="com.online.college.core.course.domain.CourseQueryDto" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM t_course
 		<trim prefix="WHERE " prefixOverrides="AND |OR "> 
@@ -96,6 +97,7 @@
 		</trim>
 	</select>
 
+	<!-- 分页查询 2个参数 -->
 	<select id="queryPage" resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />

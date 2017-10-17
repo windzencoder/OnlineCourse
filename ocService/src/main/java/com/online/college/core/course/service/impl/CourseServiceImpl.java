@@ -21,6 +21,7 @@ public class CourseServiceImpl implements ICourseService{
 	@Autowired
 	private CourseDao entityDao;
 	
+	//七牛云图片
 	private void prepareCoursePicture(Course course){
 		if(null != course && StringUtils.isNotEmpty(course.getPicture())){
 			course.setPicture(QiniuStorage.getUrl(course.getPicture()));

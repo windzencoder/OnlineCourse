@@ -48,6 +48,9 @@ public class TailPage<E> extends AbstractPage<E> {
 		initShowNum();
 	}
 
+	/**
+	 * showPage为10，假设共有14页
+	 */
 	private void initShowNum() {
 		int startIndex;
 		int endIndex;
