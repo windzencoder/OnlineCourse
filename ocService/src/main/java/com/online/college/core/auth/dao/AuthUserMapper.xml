@@ -228,6 +228,7 @@
 		</trim>
 	</insert>
 
+	<!-- 获取首页推荐5个讲师 -->
 	<select id="queryRecomd" parameterType="com.online.college.core.auth.domain.AuthUser" resultMap="BeanResultMap">
 		SELECT 
 		<include refid="All_Columns" />
