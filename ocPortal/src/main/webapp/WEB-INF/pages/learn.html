@@ -47,7 +47,8 @@
 								<div class="meta">课程时长</div>
 								<div class="meta-value">${(course.time)!}</div>
 							</div>
-							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="following" style="float: right;margin-top:5px;" title="收藏">
+							<!-- 收藏 -->
+							<a id="collectionSpan" onclick="doCollect(${(course.id)!})" href="javascript:void(0)" class="following" style="float: right;margin-top:5px;">
 							</a>
 						</div>
 						
@@ -157,6 +158,14 @@
 						$(this).find('.drop-down').html('▲');
 					}
 				});
+				
+				//判断是否已经收藏
+				var courseId = ${(course.id)!};
+				if(courseId){
+					var url = '${s.base}/collections/isCollection.html';
+					doCollect(courseId,url);
+				}
+				
 			});	
 			
 			function doFollow(followId){
@@ -225,6 +234,27 @@
 							function(){}
 						);
 			};
+			
+			//收藏 
+			function doCollect(courseId,url){
+				if(url == undefined){
+					url = '${s.base}/collections/doCollection.html';
+				}
+				//处理收藏 
+				$.ajax({
+					url:url,
+				    type:'POST',
+				    dataType:'json',
+				    data:{"courseId":courseId},
+				    success:function(resp){
+				    	if(resp.errcode == 1){//已收藏 
+				    		$('#collectionSpan').attr('class','followed');
+				    	}else if(resp.errcode == 0){//未收藏  
+				    		$('#collectionSpan').attr('class','following');
+				    	}
+				    } 
+				});
+			}
 			
 			
 		</script>
