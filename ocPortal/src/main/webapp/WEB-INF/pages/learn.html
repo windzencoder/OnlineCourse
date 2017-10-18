@@ -116,6 +116,7 @@
 					<span class="lecturer-name">${(courseTeacher.realname)!""}</span>
 					<span class="lecturer-title">${(courseTeacher.collegeName)!""} · ${(courseTeacher.education)!""}</span>
 					<span class="lecturer-p" >${(courseTeacher.title)!""}，${(courseTeacher.sign)!""}</span>
+					<!-- 关注 -->
 					<a href="javascript:void(0)"  onclick="doFollow('${(courseTeacher.id!)}');">
 					<span id="followSpan" class="follow-btn">
 					<#if followFlag?? && followFlag>
@@ -166,11 +167,22 @@
 					doCollect(courseId,url);
 				}
 				
+				//是否已经关注教师
+				var followId = ${(courseTeacher.id!)};
+				if(followId){
+					var url = '${s.base}/follow/isFollow.html';
+					doFollow(followId, url);
+				}
+				
 			});	
 			
-			function doFollow(followId){
+			/*关注*/
+			function doFollow(followId, url){
+				if(url == undefined){
+					url = '${s.base}/follow/doFollow.html';
+				}
 				$.ajax({
-					url:'${s.base}/follow/doFollow.html',
+					url:url,
 				    type:'POST',
 				    dataType:'json',
 				    data:{"followId":followId},

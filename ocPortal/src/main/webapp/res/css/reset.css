@@ -592,7 +592,7 @@ a:focus{outline:none;}
 }
 .course-meta .static-item {
     display: inline-block;
-    padding: 0 36px;
+    padding: 0 30px;
     font-size: 12px;
     border-right: 1px solid #d9dde1;
 }
