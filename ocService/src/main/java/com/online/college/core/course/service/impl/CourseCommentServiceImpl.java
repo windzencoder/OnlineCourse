@@ -29,6 +29,7 @@ public class CourseCommentServiceImpl implements ICourseCommentService{
 
 	@Override
 	public TailPage<CourseComment> queryPage(CourseComment queryEntity ,TailPage<CourseComment> page){
+		//item总数量
 		Integer itemsTotalCount = entityDao.getTotalItemsCount(queryEntity);
 		List<CourseComment> items = entityDao.queryPage(queryEntity,page);
 		page.setItemsTotalCount(itemsTotalCount);
