@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.online.college.common.storage.QiniuStorage;
+import com.online.college.common.web.JsonView;
 import com.online.college.common.web.SessionContext;
 import com.online.college.core.auth.domain.AuthUser;
 import com.online.college.core.auth.service.IAuthUserService;
@@ -23,6 +25,8 @@ import com.online.college.core.user.domain.UserCourseSection;
 import com.online.college.core.user.service.IUserCourseSectionService;
 import com.online.college.portal.business.ICourseBusiness;
 import com.online.college.portal.vo.CourseSectionVO;
+
+import net.sf.json.JSONObject;
 /**
  * 课程详情信息
  */
@@ -139,6 +143,27 @@ public class CourseController {
 		
 		return mv;
 		
+	}
+	
+	@RequestMapping(value = "/getCurLeanInfo")
+	@ResponseBody
+	public String getCurLeanInfo(){
+		JsonView jv = new JsonView();
+		//加载当前用户学习最新课程
+		if(SessionContext.isLogin()){
+			UserCourseSection userCourseSection = new UserCourseSection();
+			userCourseSection.setUserId(SessionContext.getUserId());
+			userCourseSection = this.userCourseSectionService.queryLatest(userCourseSection);
+			if(null != userCourseSection){
+				JSONObject jsObj = new JSONObject();
+				CourseSection curCourseSection = this.courseSectionService.getById(userCourseSection.getSectionId());
+				jsObj.put("curCourseSection", curCourseSection);
+				Course curCourse = courseService.getById(userCourseSection.getCourseId());
+				jsObj.put("curCourse", curCourse);
+				jv.setData(jsObj);
+			}
+		}
+		return jv.toString();
 	}
 	
 	
