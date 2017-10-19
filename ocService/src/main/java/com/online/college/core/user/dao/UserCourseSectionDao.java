@@ -18,6 +18,11 @@ public interface UserCourseSectionDao {
 	*获取所有
 	**/
 	public List<UserCourseSection> queryAll(UserCourseSection queryEntity);
+	
+	/**
+	 * 获取最新的学习记录
+	 */
+	public UserCourseSection queryLatest(UserCourseSection queryEntity);
 
 	/**
 	*获取总数量
@@ -32,7 +37,7 @@ public interface UserCourseSectionDao {
 	/**
 	*创建新记录
 	**/
-	public void create(UserCourseSection entity);
+	public void createSelectivity(UserCourseSection entity);
 
 	/**
 	*根据id更新

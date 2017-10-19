@@ -1,5 +1,6 @@
 package com.online.college.portal.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,11 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.online.college.common.storage.QiniuStorage;
+import com.online.college.common.web.SessionContext;
 import com.online.college.core.auth.domain.AuthUser;
 import com.online.college.core.auth.service.IAuthUserService;
 import com.online.college.core.course.domain.Course;
 import com.online.college.core.course.domain.CourseQueryDto;
+import com.online.college.core.course.domain.CourseSection;
+import com.online.college.core.course.service.ICourseSectionService;
 import com.online.college.core.course.service.ICourseService;
+import com.online.college.core.user.domain.UserCourseSection;
+import com.online.college.core.user.service.IUserCourseSectionService;
 import com.online.college.portal.business.ICourseBusiness;
 import com.online.college.portal.vo.CourseSectionVO;
 /**
@@ -32,6 +38,12 @@ public class CourseController {
 	
 	@Autowired
 	private IAuthUserService authUserService;
+	
+	@Autowired
+	private IUserCourseSectionService userCourseSectionService;
+	
+	@Autowired
+	private ICourseSectionService courseSectionService;
 	
 	/**
 	 * 课程章节页面
@@ -71,8 +83,64 @@ public class CourseController {
 		List<Course> recomdCourseList = this.courseService.queryList(queryEntity);
 		mv.addObject("recomdCourseList", recomdCourseList);
 		
+		//当前学习章节
+		UserCourseSection userCourseSection = new UserCourseSection();
+		userCourseSection.setCourseId(courseId);//课程id
+		userCourseSection.setUserId(SessionContext.getUserId());//当前用户
+		userCourseSection = this.userCourseSectionService.queryLatest(userCourseSection);//获取学习最新章节
+		if (null != userCourseSection) {
+			CourseSection curCourseSection = courseSectionService.getById(userCourseSection.getSectionId());
+			mv.addObject("curCourseSection", curCourseSection);
+		}
+		
 		return mv;
 	}
+	
+	/**
+	 * 视频学习页面
+	 * @param sectionId 章节id
+	 * @return
+	 */
+	@RequestMapping("/video/{sectionId}")
+	public ModelAndView video(@PathVariable Long sectionId){
+		if (null == sectionId) {
+			return new ModelAndView("/error/404");
+		}
+		CourseSection courseSection = courseSectionService.getById(sectionId);//节
+		if (null == courseSection) {
+			return new ModelAndView("/error/404");
+		}
+		
+		
+		ModelAndView mv = new ModelAndView("video");
+		//获取课程章节
+		List<CourseSectionVO> chaptSections = this.courseBusiness.queryCourseSection(courseSection.getCourseId());
+		mv.addObject("courseSection", courseSection);
+		mv.addObject("chaptSections", chaptSections);
+		
+		//用户学习记录
+		UserCourseSection userCourseSection = new UserCourseSection();
+		userCourseSection.setCourseId(courseSection.getCourseId());//课程id
+		userCourseSection.setUserId(SessionContext.getUserId());//当前用户
+		userCourseSection.setSectionId(courseSection.getId());//节id
+		UserCourseSection result = userCourseSectionService.queryLatest(userCourseSection);
+		
+		if (null == result) {//如果没有学习记录，插入
+			userCourseSection.setCreateTime(new Date());
+			userCourseSection.setCreateUser(SessionContext.getUsername());
+			userCourseSection.setUpdateTime(new Date());
+			userCourseSection.setUpdateUser(SessionContext.getUsername());
+			
+			userCourseSectionService.createSelectivity(userCourseSection);
+		}else{//如果存在学习记录，则更新
+			result.setUpdateTime(new Date());
+			userCourseSectionService.update(result);
+		}
+		
+		return mv;
+		
+	}
+	
 	
 	
 }

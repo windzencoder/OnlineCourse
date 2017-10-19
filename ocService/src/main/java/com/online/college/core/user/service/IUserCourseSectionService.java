@@ -17,6 +17,12 @@ public interface IUserCourseSectionService {
 	*获取所有
 	**/
 	public List<UserCourseSection> queryAll(UserCourseSection queryEntity);
+	
+
+	/**
+	 * 获取最新的
+	 */
+	public UserCourseSection queryLatest(UserCourseSection queryEntity);
 
 	/**
 	*分页获取
@@ -26,7 +32,7 @@ public interface IUserCourseSectionService {
 	/**
 	*创建
 	**/
-	public void create(UserCourseSection entity);
+	public void createSelectivity(UserCourseSection entity);
 
 	/**
 	*根据id更新

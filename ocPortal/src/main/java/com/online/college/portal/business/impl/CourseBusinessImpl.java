@@ -32,7 +32,7 @@ public class CourseBusinessImpl implements ICourseBusiness {
 	public List<CourseSectionVO> queryCourseSection(Long courseId){
 		List<CourseSectionVO> resultList = new ArrayList<CourseSectionVO>();
 		CourseSection queryEntity = new CourseSection();
-		queryEntity.setCourseId(courseId);
+		queryEntity.setCourseId(courseId);//课程id
 		queryEntity.setOnsale(CourseEnum.ONSALE.value());//上架
 		
 		Map<Long,CourseSectionVO> tmpMap = new LinkedHashMap<Long,CourseSectionVO>();
