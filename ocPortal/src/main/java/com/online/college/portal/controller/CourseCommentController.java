@@ -83,21 +83,44 @@ public class CourseCommentController {
 			return new JsonView(3).toString();//文字太长或者为空
 		}
 		
-		CourseSection courseSection = courseSectionService.getById(entity.getSectionId());
-		if(null != courseSection){
-			entity.setSectionTitle(courseSection.getName());
-			entity.setToUsername(entity.getCreateUser());//toUsername可以作为页面入参
-			entity.setUsername(SessionContext.getUsername());
-			entity.setCreateTime(new Date());
-			entity.setCreateUser(SessionContext.getUsername());
-			entity.setUpdateTime(new Date());
-			entity.setUpdateUser(SessionContext.getUsername());
-			
-			this.courseCommentService.createSelectivity(entity);
-			return new JsonView(1).toString();
+		if(null != entity.getRefId()){//来自于个人中心评论
+			CourseComment refComment = this.courseCommentService.getById(entity.getRefId());
+			if(null != refComment){
+				CourseSection courseSection = courseSectionService.getById(refComment.getSectionId());
+				if(null != courseSection){
+					entity.setRefContent(refComment.getContent());
+					entity.setRefId(entity.getRefId());
+					entity.setCourseId(refComment.getCourseId());
+					entity.setSectionId(refComment.getSectionId());
+					entity.setSectionTitle(courseSection.getName());
+					
+					entity.setToUsername(refComment.getUsername());//引用的评论的username
+					entity.setUsername(SessionContext.getUsername());
+					entity.setCreateTime(new Date());
+					entity.setCreateUser(SessionContext.getUsername());
+					entity.setUpdateTime(new Date());
+					entity.setUpdateUser(SessionContext.getUsername());
+					
+					this.courseCommentService.createSelectivity(entity);
+					return new JsonView(0).toString();
+				}
+			}
 		}else{
-			return new JsonView(0).toString();
+			CourseSection courseSection = courseSectionService.getById(entity.getSectionId());
+			if(null != courseSection){
+				entity.setSectionTitle(courseSection.getName());
+				entity.setToUsername(entity.getCreateUser());//toUsername可以作为页面入参
+				entity.setUsername(SessionContext.getUsername());
+				entity.setCreateTime(new Date());
+				entity.setCreateUser(SessionContext.getUsername());
+				entity.setUpdateTime(new Date());
+				entity.setUpdateUser(SessionContext.getUsername());
+				
+				this.courseCommentService.createSelectivity(entity);
+				return new JsonView(0).toString();
+			}
 		}
+		return new JsonView(1).toString();
 	}
 	
 }
