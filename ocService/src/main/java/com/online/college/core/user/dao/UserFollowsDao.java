@@ -1,7 +1,9 @@
 package com.online.college.core.user.dao;
 
 import java.util.List;
+
 import com.online.college.common.page.TailPage;
+import com.online.college.core.user.domain.UserFollowStudyRecord;
 import com.online.college.core.user.domain.UserFollows;
 
 
@@ -26,6 +28,18 @@ public interface UserFollowsDao {
 	*分页获取
 	**/
 	public List<UserFollows> queryPage(UserFollows queryEntity , TailPage<UserFollows> page);
+	
+	/**
+	*获取总数量
+	**/
+	public Integer getFollowStudyRecordCount(UserFollowStudyRecord queryEntity);
+
+	/**
+	*分页获取
+	**/
+	public List<UserFollowStudyRecord> queryFollowStudyRecord(UserFollowStudyRecord queryEntity , TailPage<UserFollowStudyRecord> page);
+	
+	
 
 	/**
 	*创建新记录

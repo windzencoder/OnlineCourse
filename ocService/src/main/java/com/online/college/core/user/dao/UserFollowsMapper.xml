@@ -48,12 +48,46 @@
 		LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
 	</select>
 
+
+	
+
+	<select id="getFollowStudyRecordCount" parameterType="com.online.college.core.user.domain.UserFollowStudyRecord" resultType="java.lang.Integer">
+		SELECT COUNT(cs.id)
+		FROM 
+		t_user_follows f ,t_user_course_section cs
+		WHERE f.user_id = #{userId, jdbcType=INTEGER} 
+		AND f.follow_id = cs.user_id 
+		AND f.del = 0
+	</select>
+	
+	
+	<select id="queryFollowStudyRecord" resultType="com.online.college.core.user.domain.UserFollowStudyRecord">
+		SELECT 
+		cs.course_id, cs.section_id , f.follow_id, 
+		c.name as courseName, s.name as sectionName, 
+		u.username,u.header,cs.create_time
+		FROM 
+		t_user_follows f ,t_user_course_section cs, t_course c , t_course_section s, t_auth_user u
+		WHERE f.user_id = #{param1.userId, jdbcType=INTEGER} 
+		AND f.follow_id = cs.user_id 
+		AND f.del = 0
+		AND f.follow_id = u.id
+		AND cs.course_id = c.id
+		AND cs.section_id = s.id
+		ORDER BY cs.id DESC
+		LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+	</select>
+	
+	
+
 	<select id="getById" parameterType="java.lang.Long" resultType="com.online.college.core.user.domain.UserFollows">
 		SELECT 
 		<include refid="All_Columns"  />
 		FROM t_user_follows
 		WHERE id = #{id, jdbcType=INTEGER}
 	</select>
+	
+	
 
 	<insert id="create" parameterType="com.online.college.core.user.domain.UserFollows" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
 		INSERT INTO t_user_follows
