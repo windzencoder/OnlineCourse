@@ -25,7 +25,7 @@ import com.online.college.common.web.SessionContext;
 public class IdentifyCodeController {
 	@RequestMapping("/code")
 	public void init(HttpServletRequest request, HttpServletResponse response){
-		String random=RandomStringUtils.randomAlphanumeric(4); 
+		String random=RandomStringUtils.randomAlphanumeric(4); //随机字符串
 		//保存random字符串在session中
 		SessionContext.setAttribute(request, SessionContext.IDENTIFY_CODE_KEY, random);
 		response.setContentType("image/jpeg"); 

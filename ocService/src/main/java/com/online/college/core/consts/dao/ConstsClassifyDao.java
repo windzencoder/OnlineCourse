@@ -5,7 +5,11 @@ import com.online.college.common.page.TailPage;
 import com.online.college.core.consts.domain.ConstsClassify;
 import com.online.college.core.consts.domain.ConstsCollege;
 
-
+/**
+ * 课程分类Dao
+ * @author Miller
+ *
+ */
 public interface ConstsClassifyDao {
 
 	/**

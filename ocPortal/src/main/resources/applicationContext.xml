@@ -101,8 +101,7 @@
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut expression="execution (* com.online.college.*.service.*.*(..))"
-			id="services" />
+		<aop:pointcut expression="execution (* com.online.college.*.service.*.*(..))" id="services" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="services" />
 	</aop:config>
 

@@ -55,6 +55,7 @@ public class AuthRealm extends AuthorizingRealm {
 				authUser.setStatus(tmpAuthUser.getStatus());
 				if(!StringUtils.isBlank(tmpAuthUser.getHeader())){
 					authUser.setHeader(QiniuStorage.getUrl(tmpAuthUser.getHeader(),ThumbModel.THUMB_48));//设置头像
+					//<@shiro.principal property="header"/>这里可以直接取出头像的url，在img标签显示
 				}else{
 					authUser.setHeader("/res/i/header.jpg");//设置默认头像
 				}
@@ -71,6 +72,10 @@ public class AuthRealm extends AuthorizingRealm {
 		} catch (Exception e) {
 			throw new AuthenticationException("## user permission setter exception! ");
 		}*/
+		
+		/*
+		 * 这里的principal为authUser
+		 */
 		// 创建授权用户
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(authUser, password, getName());
 		return info;

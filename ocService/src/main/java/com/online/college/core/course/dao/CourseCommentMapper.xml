@@ -88,6 +88,7 @@
 		AND tc.del = 0
 	</select>
 	
+	<!-- 分页获取我的所有课程的qa -->
 	<select id="queryMyQAItemsPage" resultMap="BeanResultMap">
 		SELECT tc.id, tc.username, tc.course_id, tc.content, tc.section_title,
 		tc.section_id , tc.create_time, tc.ref_content, t.name as course_name

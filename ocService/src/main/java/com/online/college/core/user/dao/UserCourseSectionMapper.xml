@@ -68,6 +68,7 @@
 		WHERE user_id = #{userId}
 	</select>
 
+	<!-- 我的课程 -->
 	<select id="queryPage" resultType="com.online.college.core.user.domain.UserCourseSectionDto">
 		SELECT t.* , c.name AS courseName , s.name AS sectionName 
 		FROM t_user_course_section t , t_course c , t_course_section s

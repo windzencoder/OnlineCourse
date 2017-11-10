@@ -145,6 +145,10 @@ public class CourseController {
 		
 	}
 	
+	/**
+	 * 获取用户当前的学习进度
+	 * @return
+	 */
 	@RequestMapping(value = "/getCurLeanInfo")
 	@ResponseBody
 	public String getCurLeanInfo(){
@@ -153,11 +157,14 @@ public class CourseController {
 		if(SessionContext.isLogin()){
 			UserCourseSection userCourseSection = new UserCourseSection();
 			userCourseSection.setUserId(SessionContext.getUserId());
+			//当前用户学习最新课程，按update_time排序
 			userCourseSection = this.userCourseSectionService.queryLatest(userCourseSection);
 			if(null != userCourseSection){
 				JSONObject jsObj = new JSONObject();
+				//获取学习的课程的section
 				CourseSection curCourseSection = this.courseSectionService.getById(userCourseSection.getSectionId());
 				jsObj.put("curCourseSection", curCourseSection);
+				//获取学习的课程
 				Course curCourse = courseService.getById(userCourseSection.getCourseId());
 				jsObj.put("curCourse", curCourse);
 				jv.setData(jsObj);

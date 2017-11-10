@@ -95,8 +95,8 @@
 			}
 			function photoImgChange(){
 				var img = $('#pictureImg').val();
-				if(oc.photoValid(img)){
-					oc.previewUploadImg('pictureImg','user_header');
+				if(oc.photoValid(img)){//验证图片格式
+					oc.previewUploadImg('pictureImg','user_header');//js预览图片 pictureImg是input
 					$('#user_header').show();
 					$('#imgErrSpan').html('');
 					return;

@@ -17,7 +17,7 @@ public interface IConstsSiteCarouselService {
 	public ConstsSiteCarousel getById(Long id);
 
 	/**
-	*获取所有
+	*获取所有 获取指定的数量的轮播图
 	**/
 	public List<ConstsSiteCarousel> queryCarousels(Integer count);
 

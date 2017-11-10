@@ -28,6 +28,10 @@ public class ConstsSiteCarouselServiceImpl implements IConstsSiteCarouselService
 		return entityDao.getById(id);
 	}
 
+	/**
+	 * 获取首页的轮播图片 
+	 * count 数量
+	 */
 	@Override
 	public List<ConstsSiteCarousel> queryCarousels(Integer count){
 		List<ConstsSiteCarousel> resultList = entityDao.queryCarousels(count);

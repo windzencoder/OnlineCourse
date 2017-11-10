@@ -15,6 +15,7 @@ public enum CourseEnum {
 	
 	
 	private Integer value;
+	// 枚举对象构造函数
 	private CourseEnum(Integer value) {
 		this.value = value;
 	}

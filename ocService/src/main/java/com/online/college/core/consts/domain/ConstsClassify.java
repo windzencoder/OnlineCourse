@@ -21,7 +21,7 @@ public class ConstsClassify extends BaseEntity{
 	private String code;
 
 	/**
-	*父级别id
+	*父级别id 课程分类为0表示为一级分类
 	**/
 	private String parentCode;
 

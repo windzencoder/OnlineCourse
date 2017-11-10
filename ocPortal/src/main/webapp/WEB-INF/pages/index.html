@@ -23,7 +23,7 @@
 					<div class="main-bg">
 						<#if carouselList?? && carouselList?size gt 0>
 						<#list carouselList as item>
-						<a href="${s.base}${item.url!''}">
+						<a href="${s.base}/${item.url!''}">
 							<div class="main-bg-item"  style='background-image: url("${item.picture!}"); '></div>
 						</a>
 						</#list>
@@ -304,7 +304,7 @@
 		
 		var index = 0;
 		var timer = 4000;
-		$('.bg-nav a').click(function(){
+		$('.bg-nav a').click(function(){//轮播小圆点点击事件
 			index = $('.bg-nav a').index($(this));
 			rollBg(index);
 		});

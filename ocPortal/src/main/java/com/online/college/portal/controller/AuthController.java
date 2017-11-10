@@ -86,7 +86,7 @@ public class AuthController {
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),EncryptUtil.encodedByMD5(user.getPassword()));
 		try {
 			if(rememberMe != null && rememberMe == 1){
-				token.setRememberMe(true);
+				token.setRememberMe(true);//记住我
 			}
 			currentUser.login(token);//shiro：不抛出异常，登陆成功
 			return new JsonView().toString();

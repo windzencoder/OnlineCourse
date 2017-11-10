@@ -46,6 +46,7 @@
 		WHERE del = 0 
 	</select>
 
+	<!-- 我的收藏 -->
 	<select id="queryPage" resultType="com.online.college.core.user.domain.UserCollections">
 		SELECT uc.object_id, uc.id, c.name, uc.create_time, uc.classify, uc.create_time
 		FROM t_user_collections uc , t_course c

@@ -17,7 +17,7 @@ public interface ICourseService {
 	public Course getById(Long id);
 
 	/**
-	*获取所有
+	*根据CourseQueryDto条件，查询到课程
 	**/
 	public List<Course> queryList(CourseQueryDto queryEntity);
 

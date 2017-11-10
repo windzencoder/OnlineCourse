@@ -2,6 +2,11 @@ package com.online.college.common.web;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 返回json数据的模型
+ * @author Miller
+ *
+ */
 public class JsonView {
 	
 	//错误代码 0-成功

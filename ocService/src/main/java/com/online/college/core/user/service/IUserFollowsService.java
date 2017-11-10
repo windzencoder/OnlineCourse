@@ -25,8 +25,9 @@ public interface IUserFollowsService {
 	public TailPage<UserFollows> queryPage(UserFollows queryEntity ,TailPage<UserFollows> page);
 
 	/**
-	*分页获取
-	**/
+	 * 加载关注用户的动态
+	 *  分页获取
+	 **/
 	public TailPage<UserFollowStudyRecord> queryUserFollowStudyRecordPage(UserFollowStudyRecord queryEntity ,TailPage<UserFollowStudyRecord> page);
 	
 	/**

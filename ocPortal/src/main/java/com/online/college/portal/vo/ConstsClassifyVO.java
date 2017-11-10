@@ -7,7 +7,7 @@ import com.online.college.core.consts.domain.ConstsClassify;
 import com.online.college.core.course.domain.Course;
 
 /**
- * 课程分类
+ * 课程分类VO
  * 页面展示 value object
  */
 public class ConstsClassifyVO extends ConstsClassify {

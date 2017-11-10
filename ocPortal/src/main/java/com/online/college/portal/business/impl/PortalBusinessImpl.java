@@ -32,7 +32,7 @@ public class PortalBusinessImpl implements IPortalBusiness {
 	private ICourseService courseService;
 
 	/**
-	 * 获取所有，包括一级分类&二级分类
+	 * 获取所有课程分类，包括一级分类&二级分类
 	 */
 	public List<ConstsClassifyVO> queryAllClassify(){
 		List<ConstsClassifyVO> resultList = new ArrayList<ConstsClassifyVO>();
@@ -44,6 +44,7 @@ public class PortalBusinessImpl implements IPortalBusiness {
 	
 	/**
 	 * 获取所有分类
+	 * @return map
 	 */
 	public Map<String,ConstsClassifyVO> queryAllClassifyMap(){
 		Map<String,ConstsClassifyVO> resultMap = new LinkedHashMap<String,ConstsClassifyVO>();
@@ -52,11 +53,11 @@ public class PortalBusinessImpl implements IPortalBusiness {
 			ConstsClassify c = it.next();
 			if("0".equals(c.getParentCode())){//一级分类
 				ConstsClassifyVO vo = new ConstsClassifyVO();
-				BeanUtils.copyProperties(c, vo);
+				BeanUtils.copyProperties(c, vo);//bean的复制
 				resultMap.put(vo.getCode(), vo);
 			}else{//二级分类
-				if(null != resultMap.get(c.getParentCode())){
-					resultMap.get(c.getParentCode()).getSubClassifyList().add(c);//添加到子分类中
+				if(null != resultMap.get(c.getParentCode())){//map中存在一级分类
+					resultMap.get(c.getParentCode()).getSubClassifyList().add(c);//添加到子分类集合中
 				}
 			}
 		}

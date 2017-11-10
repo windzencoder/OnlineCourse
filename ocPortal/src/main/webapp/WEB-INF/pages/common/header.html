@@ -140,6 +140,7 @@
             $('#' + cid).hide();
         });
 		
+		//如果已经登录 SHIRO_LOGIN是在res.html中定义的
 		if(SHIRO_LOGIN){
 			//获取当前用户学习进度
 			$.ajax({
@@ -205,6 +206,7 @@
 		document.getElementById(eleId).src = CONTEXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
 	}
 	
+	//ajax登录
 	function doAjaxLogin(){
 		var username = $('#usernameHeader1').val();
 		var password = $('#passwordHeader1').val();
@@ -237,7 +239,7 @@
 			success : function(respText) {
 				var resp = $.parseJSON(respText);
 				if (resp.errcode == 0) {
-					window.location.reload();
+					window.location.reload();//登录成功重新加载
 				} else if(resp.errcode == 1) {
 					$('#loginError').show();
 					$('#loginError').html("用户名密码错");
