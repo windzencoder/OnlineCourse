@@ -240,6 +240,12 @@
 	<select id="getTotalItemsCount" parameterType="com.online.college.core.auth.domain.AuthUser" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM t_auth_user
 		WHERE del = 0 
+		<if test="username != null">
+		AND username like CONCAT('%', #{username}, '%')
+		</if>
+		<if test="status != null">
+		AND status = #{status}
+		</if>
 	</select>
 	
 	<!-- param2表示第二个参数的值 -->
@@ -248,6 +254,12 @@
 		<include refid="All_Columns" />
 		FROM t_auth_user
 		WHERE del = 0 
+		<if test="param1.username != null">
+		AND username like CONCAT('%', #{param1.username}, '%')
+		</if>
+		<if test="param1.status != null">
+		AND status = #{param1.status}
+		</if>
 		ORDER BY id
 		LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
 	</select>

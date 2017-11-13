@@ -20,6 +20,7 @@
     <div class="content">
         <div class="container-fluid">
 			
+			<!-- submit提交到本页 -->
 			<form id="queryPageForm" class="mt-15" >
 				<div class="block span6">
 					<a class="block-heading f-14" data-toggle="collapse">教师管理</a>
@@ -144,6 +145,8 @@
 	<!-- 弹出层 -end -->
 	
 	<script type="text/javascript">
+	
+		//修改
 		function toEdit(id){
 			$.ajax({
 				url:'${s.base}/user/getById.html',
@@ -160,6 +163,7 @@
 			});
 		}
 		
+		//保存修改
 		function doSave(){
 			$('#myForm').ajaxSubmit({
 				datatype : 'json',
@@ -167,7 +171,7 @@
 					var resp = $.parseJSON(resp);
 					if (resp.errcode == 0) {
 						$('#myModal').modal('hide');
-						_queryPage();
+						_queryPage();//位于tailPage页面
 					} else {
 						Modal.tipFailure(resp.message);//失败提示 
 					}
