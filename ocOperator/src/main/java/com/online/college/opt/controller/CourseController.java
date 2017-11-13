@@ -137,6 +137,17 @@ public class CourseController {
 		mv.addObject("subClassifys", subClassifys);
 		
 		//获取报表统计信息
+		/*
+		 * SQL查询形式如下：
+		 * 
+		 * SELECT count(id) totalCount , date_format(create_time,'%Y-%m-%d') as dateStr 
+			FROM t_user_course_section 
+			WHERE course_id = 1 
+			AND CREATE_TIME >= '2017-05-06 14:31:22'
+			AND CREATE_TIME <= '2017-11-14 16:49:02'
+			GROUP BY date_format(create_time,'%Y-%m-%d') 
+			ORDER BY create_time;
+		 */
 		CourseStudyStaticsDto staticsDto = new CourseStudyStaticsDto();
 		staticsDto.setCourseId(course.getId());
 		staticsDto.setEndDate(new Date());
