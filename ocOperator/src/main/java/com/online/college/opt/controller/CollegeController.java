@@ -23,7 +23,7 @@ public class CollegeController{
 	private IConstsCollegeService entityService;
 	
 	/**
-	 * 分页
+	 * 分页 查询网校列表
 	 * @param queryEntity
 	 * @param page
 	 * @return
@@ -39,18 +39,32 @@ public class CollegeController{
 			queryEntity.setName(null);
 		}
 		
+		page.setPageSize(2);//设置每页2个
+		
 		page = entityService.queryPage(queryEntity,page);
+		
 		mv.addObject("page",page);
 		mv.addObject("queryEntity",queryEntity);
 		return mv;
 	}
 	
+	/**
+	 * 根据id获取网校
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/getById")
 	@ResponseBody
 	public String getById(Long id){
 		return JsonView.render(entityService.getById(id));
 	}
 	
+	/**
+	 * id为null就创建
+	 * 不为null就更新
+	 * @param entity
+	 * @return
+	 */
 	@RequestMapping(value = "/doMerge")
 	@ResponseBody
 	public String doMerge(ConstsCollege entity){
@@ -70,6 +84,11 @@ public class CollegeController{
 		return new JsonView().toString();
 	}
 
+	/**
+	 * 逻辑删除
+	 * @param entity
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteLogic")
 	@ResponseBody
 	public String deleteLogic(ConstsCollege entity){

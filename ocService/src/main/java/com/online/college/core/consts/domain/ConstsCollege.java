@@ -2,6 +2,9 @@ package com.online.college.core.consts.domain;
 
 import com.online.college.common.orm.BaseEntity;
 
+/**
+ * 网校
+ */
 public class ConstsCollege extends BaseEntity{
 
 	private static final long serialVersionUID = -7643904360103197835L;

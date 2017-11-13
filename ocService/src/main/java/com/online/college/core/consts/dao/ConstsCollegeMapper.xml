@@ -35,6 +35,7 @@
 		</if>
 	</select>
 
+	<!-- 网校分页查询 -->
 	<select id="queryPage" resultType="com.online.college.core.consts.domain.ConstsCollege">
 		SELECT 
 		<include refid="All_Columns" />

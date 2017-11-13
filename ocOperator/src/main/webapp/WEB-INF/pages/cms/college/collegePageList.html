@@ -60,6 +60,7 @@
 									</#if>
 								</tbody>
 							</table>
+							<!-- 分页 放在form表单里-->
 							<p><#include "../../common/tailPage.html"/></p>
 						</div>
 					</div>
@@ -69,7 +70,7 @@
     	</div>
 	</div>
 	
-	<!-- 弹出层 -start -->
+	<!-- 添加 弹出层 -start -->
 	<div class="modal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
 		<div class="modal_wapper">
 			<div class="modal-dialog w-8" >
@@ -137,8 +138,9 @@
 				//$('#myModal').modal('show');
 				Modal.show('myModal');
 				$('#code').removeAttr('disabled');
-			}else{
+			}else{//修改
 				$('#code').attr('disabled','disabled');
+				//获取网校信息
 				$.ajax({
 					url:'${s.base}/college/getById.html',
 				    type:'POST',
@@ -147,7 +149,7 @@
 				    success:function(resp){
 				    	var errcode = resp.errcode;
 				    	if(errcode == 0){
-				    		Modal.show('myModal');
+				    		Modal.show('myModal');//封装的show
 				    		$("#myForm").fill(resp.data);
 				    	}
 				    }
