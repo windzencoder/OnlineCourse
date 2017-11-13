@@ -80,6 +80,7 @@
 		#{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
 	</insert>
 	
+	<!-- 获取插入记录的自增长字段值 -->
 	<insert id="createSelectivity" parameterType="com.online.college.core.course.domain.CourseSection" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
 		INSERT INTO t_course_section
 		<trim prefix="(" suffix=")"  suffixOverrides="," >
@@ -161,6 +162,7 @@
 		</trim>
 	</insert>
 	
+	<!-- 批量更新 -->
 	<insert id="createList" parameterType="list">  
 		INSERT INTO t_course_section
 		( course_id, parent_id, name, sort, time, onsale, video_url, 

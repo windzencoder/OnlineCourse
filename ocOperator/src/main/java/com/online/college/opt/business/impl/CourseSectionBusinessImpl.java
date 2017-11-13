@@ -44,6 +44,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
 					maxSort = 0;
 				}
 				maxSort += (i + 1);
+				//创建节
 				CourseSection courseSection = new CourseSection();
 				courseSection.setCourseId(tmpVO.getCourseId());
 				courseSection.setName(tmpVO.getName());
@@ -55,7 +56,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
 				courseSection.setCreateUser(SessionContext.getUsername());
 				courseSection.setUpdateUser(SessionContext.getUsername());
 				//创建章
-				entityService.createSelectivity(courseSection);
+				entityService.createSelectivity(courseSection);//这里 有获取插入记录的自增长字段值 
 				
 				List<CourseSection> subCourseSections = tmpVO.getSections();
 				if(CollectionUtils.isNotEmpty(subCourseSections)){
@@ -63,7 +64,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
 					for(int j = 0; j < subCourseSections.size(); j++){
 						CourseSection courseSectionTmp = subCourseSections.get(j);
 						courseSectionTmp.setCourseId(courseSection.getCourseId());
-						courseSectionTmp.setParentId(courseSection.getId());
+						courseSectionTmp.setParentId(courseSection.getId());//设置为节的id
 						courseSectionTmp.setSort(j+1);
 						
 						courseSectionTmp.setCreateTime(new Date());
@@ -83,11 +84,11 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
 						totalTime = appendCourseSectionTime(totalTime,courseSectionTmp.getTime());
 					}
 					//批量创建 节
-					entityService.createList(subCourseSections);
+					entityService.createList(subCourseSections);//批量更新
 					
 					//更新时间
 					courseSection.setTime(totalTime);
-					entityService.updateSelectivity(courseSection);
+					entityService.updateSelectivity(courseSection);//更新节的update时间
 				}
 				
 			}
