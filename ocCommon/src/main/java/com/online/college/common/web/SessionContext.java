@@ -29,6 +29,32 @@ public class SessionContext {
 		return null;
 	}
 	
+	public static Long getWxUserId(HttpServletRequest request){
+		if(null != getWxAuthUser(request))
+			return getWxAuthUser(request).getUserId();
+		return null;
+	}
+	
+	public static String getWxUsername(HttpServletRequest request){
+		if(null != getWxAuthUser(request))
+			return getWxAuthUser(request).getUsername();
+		return null;
+	}
+	
+	public static boolean isWxLogin(HttpServletRequest request){
+		return null != getWxAuthUser(request);
+	}
+	
+	// 如果是微信登录获取当前用户
+	public static SessionUser getWxAuthUser(HttpServletRequest request){
+		String sessionId = request.getSession().getId();
+		Object obj = SessionContext.getAttribute(request, sessionId);
+		if(null != obj){
+			return (SessionUser)obj;
+		}
+		return null;
+	}
+	
 	// 获取当前登录用户
 	public static SessionUser getAuthUser() {
 		if(null != SecurityUtils.getSubject().getPrincipal()){
